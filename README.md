@@ -31,7 +31,7 @@ This repository contains a comprehensive data analytics solution using:
 - Delta Lake**: Data lakehouse architecture
 - MLflow**: ML lifecycle management
 
-## 🏗️ Architecture
+## Architecture
 
 ### Infrastructure Components
 
@@ -107,7 +107,7 @@ roles/iam.serviceAccountAdmin
 roles/monitoring.admin
 ```
 
-## ⚡ Installation
+##  Installation
 
 ### 1. Environment Setup
 
@@ -202,7 +202,7 @@ public_subnet_cidr = "10.0.2.0/24"
 - Stream Processing**: Apache Spark Streaming
 - Real-time Analytics**: Live dashboards and alerts
 
-## 🔍 Monitoring and Observability
+##  Monitoring and Observability
 
 ### Infrastructure Monitoring
 
@@ -216,7 +216,7 @@ public_subnet_cidr = "10.0.2.0/24"
 - Data Quality**: Automated validation checks
 - Performance**: Query and processing metrics
 
-## 🧪 Testing
+##  Testing
 
 ### Unit Tests
 
@@ -246,7 +246,7 @@ cd tests/e2e
 python -m pytest test_complete_pipeline.py
 ```
 
-## 💰 Cost Optimization
+##  Cost Optimization
 
 ### Infrastructure Costs
 
@@ -313,14 +313,14 @@ terraform workspace select prod
 terraform apply -var-file="prod.tfvars"
 ```
 
-## 📚 Documentation
+## Documentation
 
 - Architecture Guide**: Detailed system design
 - API Reference**: Databricks and GCP APIs
 - Troubleshooting**: Common issues and solutions
 - Best Practices**: Development guidelines
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature/amazing-pipeline`
@@ -328,7 +328,7 @@ terraform apply -var-file="prod.tfvars"
 4. Push to branch: `git push origin feature/amazing-pipeline`
 5. Submit pull request
 
-## 📞 Support
+## Support
 
 ### Getting Help
 
@@ -344,7 +344,7 @@ terraform apply -var-file="prod.tfvars"
 - Network**: Validate VPC and firewall configurations
 - Quotas**: Monitor GCP resource quotas
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
