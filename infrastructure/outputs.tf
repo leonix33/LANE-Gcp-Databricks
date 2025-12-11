@@ -204,3 +204,28 @@ output "cost_optimization" {
     storage_lifecycle     = "Enabled with multi-tier archiving"
   }
 }
+# Security and monitoring outputs
+output "security_monitoring_config" {
+  description = "Security monitoring configuration for tools"
+  value = {
+    project_id = var.project_id
+    region = var.region
+    environment = var.environment
+    vpc_network = google_compute_network.databricks_vpc.name
+    service_account = google_service_account.databricks_sa.email
+    security_tools_enabled = true
+    cost_optimization_enabled = true
+  }
+  sensitive = false
+}
+
+output "security_tools_status" {
+  description = "Status of integrated security tools"
+  value = {
+    security_scanner = "Available at security/tools/databricks-security-scanner.py"
+    cost_analyzer = "Available at monitoring/cost-optimization/cost-analyzer.py"
+    compliance_monitor = "Available at security/tools/security-monitor.sh"
+    policies_configured = true
+    automated_scanning = true
+  }
+}

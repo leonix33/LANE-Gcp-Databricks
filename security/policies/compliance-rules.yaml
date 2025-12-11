@@ -1,0 +1,143 @@
+# Databricks Compliance Monitoring Rules
+# Based on SOC2, GDPR, and enterprise security best practices
+
+compliance_rules:
+  access_control:
+    - rule: workspace_access_control_enabled
+      description: "Workspace access control must be enabled"
+      severity: HIGH
+      check: "workspace_conf.enableWorkspaceAccessControl == true"
+      remediation: "Enable workspace access control in admin settings"
+    
+    - rule: table_access_control_enabled
+      description: "Table access control must be enabled"
+      severity: HIGH
+      check: "workspace_conf.enableTableAccessControl == true"
+      remediation: "Enable table access control for Unity Catalog"
+    
+    - rule: admin_user_limit
+      description: "Limit number of admin users to minimum required"
+      severity: MEDIUM
+      check: "admin_users_count / total_users <= 0.1"
+      remediation: "Review admin user assignments and remove unnecessary privileges"
+
+  data_protection:
+    - rule: customer_managed_keys
+      description: "Use customer-managed encryption keys"
+      severity: MEDIUM
+      check: "workspace_conf.enableCustomerManagedKeys == true"
+      remediation: "Configure customer-managed encryption keys"
+    
+    - rule: data_classification
+      description: "Implement data classification and tagging"
+      severity: HIGH
+      check: "data_classification_enabled == true"
+      remediation: "Implement Unity Catalog data classification"
+    
+    - rule: pii_detection
+      description: "Enable PII detection and monitoring"
+      severity: HIGH
+      check: "pii_detection_enabled == true"
+      remediation: "Configure automated PII detection workflows"
+
+  network_security:
+    - rule: private_connectivity
+      description: "Use private connectivity for data access"
+      severity: HIGH
+      check: "private_connectivity_enabled == true"
+      remediation: "Configure VPC endpoints and private connectivity"
+    
+    - rule: ip_access_lists
+      description: "Configure IP access lists for workspace access"
+      severity: MEDIUM
+      check: "ip_access_lists_configured == true"
+      remediation: "Configure IP allowlists for workspace access"
+    
+    - rule: secure_cluster_connectivity
+      description: "Enable secure cluster connectivity"
+      severity: HIGH
+      check: "secure_cluster_connectivity == true"
+      remediation: "Enable secure cluster connectivity mode"
+
+  audit_logging:
+    - rule: audit_logs_enabled
+      description: "Audit logging must be enabled"
+      severity: HIGH
+      check: "audit_logs_enabled == true"
+      remediation: "Enable audit log delivery to external systems"
+    
+    - rule: log_retention_policy
+      description: "Implement proper log retention policies"
+      severity: MEDIUM
+      check: "log_retention_days >= 90"
+      remediation: "Configure log retention for compliance requirements"
+    
+    - rule: real_time_monitoring
+      description: "Enable real-time security monitoring"
+      severity: HIGH
+      check: "real_time_monitoring_enabled == true"
+      remediation: "Configure SIEM integration for real-time monitoring"
+
+  secret_management:
+    - rule: external_secret_scopes
+      description: "Use external secret management services"
+      severity: HIGH
+      check: "external_secret_scopes_ratio >= 0.8"
+      remediation: "Migrate to Azure Key Vault or AWS Secrets Manager"
+    
+    - rule: secret_rotation
+      description: "Implement regular secret rotation"
+      severity: MEDIUM
+      check: "secret_rotation_enabled == true"
+      remediation: "Configure automated secret rotation policies"
+
+  cluster_security:
+    - rule: auto_termination
+      description: "Configure auto-termination for all clusters"
+      severity: MEDIUM
+      check: "autotermination_minutes > 0 and autotermination_minutes <= 120"
+      remediation: "Set auto-termination between 30-120 minutes"
+    
+    - rule: latest_runtime
+      description: "Use supported LTS runtime versions"
+      severity: HIGH
+      check: "spark_version contains 'LTS'"
+      remediation: "Update clusters to use LTS runtime versions"
+    
+    - rule: disk_encryption
+      description: "Enable local disk encryption"
+      severity: HIGH
+      check: "enable_local_disk_encryption == true"
+      remediation: "Enable local disk encryption for all clusters"
+
+  cost_governance:
+    - rule: cluster_policies
+      description: "Enforce cluster policies for cost control"
+      severity: MEDIUM
+      check: "cluster_policies_enforced == true"
+      remediation: "Create and enforce cluster policies"
+    
+    - rule: budget_alerts
+      description: "Configure budget alerts and limits"
+      severity: MEDIUM
+      check: "budget_alerts_configured == true"
+      remediation: "Set up cost monitoring and budget alerts"
+
+notification_channels:
+  - type: email
+    addresses:
+      - security-team@company.com
+      - compliance@company.com
+  
+  - type: slack
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    channel: "#security-alerts"
+  
+  - type: pagerduty
+    service_key: "${PAGERDUTY_SERVICE_KEY}"
+
+reporting:
+  schedule: "0 9 * * 1"  # Weekly on Monday at 9 AM
+  format: "json"
+  include_remediation: true
+  dashboard_url: "${COMPLIANCE_DASHBOARD_URL}"
