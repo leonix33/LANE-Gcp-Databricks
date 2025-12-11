@@ -50,7 +50,7 @@ This repository contains a comprehensive data analytics solution using:
 - Notebooks**: Interactive data exploration
 - ML Experiments**: Model training and tracking
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 databricks-gcp/
